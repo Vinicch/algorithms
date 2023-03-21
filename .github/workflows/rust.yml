@@ -1,0 +1,26 @@
+name: Rust
+
+on: [push, pull_request]
+
+env:
+  CARGO_REGISTRIES_CRATES_IO_PROTOCOL: sparse
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Check formatting
+        run: cargo fmt --check
+      - name: Lint
+        run: cargo clippy -- -D warnings
+      - name: Audit
+        run: |
+          cargo install cargo-audit
+          cargo audit
+      - name: Build
+        run: cargo build
+      - name: Test
+        run: cargo test
