@@ -7,3 +7,12 @@ pub fn bubble_sort<T: Ord>(arr: &mut [T]) {
         }
     }
 }
+
+#[test]
+fn bubble() {
+    let mut arr = [3, 2, 5, 78, 56, 14, 32, 8, 5, 6];
+
+    bubble_sort(&mut arr);
+
+    assert_eq!(arr, [2, 3, 5, 5, 6, 8, 14, 32, 56, 78])
+}
