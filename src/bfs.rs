@@ -1,9 +1,8 @@
 use std::collections::VecDeque;
-use std::ops::Deref;
 
-use crate::BinaryNode;
+use crate::TreeNode;
 
-pub fn bfs<T: PartialEq>(head: &BinaryNode<T>, needle: T) -> bool {
+pub fn bfs<T: PartialEq>(head: Box<TreeNode<T>>, needle: T) -> bool {
     let mut queue = VecDeque::from([head]);
 
     while !queue.is_empty() {
@@ -15,11 +14,11 @@ pub fn bfs<T: PartialEq>(head: &BinaryNode<T>, needle: T) -> bool {
             return true;
         }
 
-        if let Some(node) = current.left.deref() {
+        if let Some(node) = current.left {
             queue.push_back(node);
         }
 
-        if let Some(node) = current.right.deref() {
+        if let Some(node) = current.right {
             queue.push_back(node);
         }
     }

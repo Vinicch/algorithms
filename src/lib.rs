@@ -5,8 +5,8 @@ pub mod dfs;
 pub mod dft;
 pub mod quick;
 
-pub struct BinaryNode<T> {
+pub struct TreeNode<T> {
     value: T,
-    left: Box<Option<BinaryNode<T>>>,
-    right: Box<Option<BinaryNode<T>>>,
+    left: Option<Box<TreeNode<T>>>,
+    right: Option<Box<TreeNode<T>>>,
 }

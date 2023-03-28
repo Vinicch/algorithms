@@ -1,6 +1,6 @@
-use crate::BinaryNode;
+use crate::TreeNode;
 
-pub fn dfs<T: PartialEq + PartialOrd>(head: &Option<BinaryNode<T>>, needle: T) -> bool {
+pub fn dfs<T: PartialEq + PartialOrd>(head: Option<Box<TreeNode<T>>>, needle: T) -> bool {
     let Some(current) = head else {
         return false;
     };
@@ -10,13 +10,13 @@ pub fn dfs<T: PartialEq + PartialOrd>(head: &Option<BinaryNode<T>>, needle: T) -
     }
 
     if current.value > needle {
-        return dfs(&current.left, needle);
+        return dfs(current.left, needle);
     }
 
-    dfs(&current.right, needle)
+    dfs(current.right, needle)
 }
 
-pub fn compare<T: PartialEq>(a: &Option<BinaryNode<T>>, b: &Option<BinaryNode<T>>) -> bool {
+pub fn compare<T: PartialEq>(a: Option<Box<TreeNode<T>>>, b: Option<Box<TreeNode<T>>>) -> bool {
     if a.is_none() && b.is_none() {
         return true;
     }
@@ -33,5 +33,5 @@ pub fn compare<T: PartialEq>(a: &Option<BinaryNode<T>>, b: &Option<BinaryNode<T>
         return false;
     }
 
-    compare(&a.left, &b.left) && compare(&a.right, &b.right)
+    compare(a.left, b.left) && compare(a.right, b.right)
 }
